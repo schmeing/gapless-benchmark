@@ -1,11 +1,15 @@
 # gapless-benchmark
-Snakemake file to reproduce the benchmark in the gapless paper
+Snakemake file to reproduce the benchmark in the gapless paper.
 
 The datasets, references and software has to be downloaded from their original source.
 The E. coli data can be downloaded [Public Health England reference collections](https://www.sanger.ac.uk/resources/downloads/bacteria/nctc/) and the [European Nucleotide Archive](https://www.ebi.ac.uk/ena/browser/view/SRR3191692), the dolphin data from the [Vertebrate Genomes Project](https://vgp.github.io/genomeark/Tursiops_truncatus/) and the human data from the [T2T consortium](https://github.com/marbl/CHM13)
 
 The files not included, but necessary to reproduce the figures in the paper are:
 ```
+bin/LR_Gapcloser (link to LR_Gapcloser main folder)
+bin/LRScaf-1.1.11.jar (link to file from LRScaf)
+bin/racon (link to folder with the racon executable in it)
+bin/TGS-GapCloser (link to TGS-GapCloser main folder)
 input/truncatus/reference/GCF_011762595.1_mTurTru1.mat.Y_genomic.fna
 input/truncatus/PacBio_CLS/ (full folder)
 input/truncatus/chromium/ (full folder)
