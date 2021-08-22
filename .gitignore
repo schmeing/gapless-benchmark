@@ -1,0 +1,13 @@
+.*
+!/.gitignore
+bin/PaSS
+bin/LR_Gapcloser
+bin/LRScaf-1.1.11.jar
+bin/racon
+bin/TGS-GapCloser
+input/*
+!input/csv
+logs
+results
+storage
+work
