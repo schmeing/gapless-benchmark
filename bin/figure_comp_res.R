@@ -29,10 +29,10 @@ data <- assemblies %>%
   mutate(cpu_time_s=cpu_time_s+cpu_time_s1+cpu_time_s0, elapsed_time_s=elapsed_time_s+elapsed_time_s1+elapsed_time_s0, memory_kb=pmax(memory_kb,memory_kb1,memory_kb0)) %>%
   select(-folder,-cpu_time_s1,-elapsed_time_s1,-memory_kb1,-cpu_time_s0,-elapsed_time_s0,-memory_kb0) %>%
   mutate(memory_gb = memory_kb/1024/1024, cpu_time = if_else(Species == "E. Coli", cpu_time_s/60, cpu_time_s/3600/24), elapsed_time = if_else(Cores == 48, if_else(Species == "E. Coli", elapsed_time_s/60, elapsed_time_s/3600/24), as.numeric(NA))) %>%
-  mutate(Coverage = replace_na(Coverage, "NA"), nrows=if_else((Assembly == "supernova" | (Assembly == "Flye" & Coverage == "high" & Data == "PacBio HiFi")) & Species == "Human", 2, 1)) %>%
+  mutate(Coverage = replace_na(Coverage, "other"), nrows=if_else((Assembly == "supernova" | (Assembly == "Flye" & Coverage == "high" & Data == "PacBio HiFi")) & Species == "Human", 2, 1)) %>%
   uncount(nrows, .id="id") %>%
   mutate(Data=if_else(Data != "Illumina" & Data != "10X Chromium", Data, if_else(Species != "Human", "PacBio CLR", if_else(id == 1, "PacBio HiFi", "Nanopore")))) %>%
-  mutate(Data=if_else(id == 1, Data, "Nanopore"), Coverage=factor(if_else(id == 1, Coverage, "NA"), levels=c("very high","high","medium","low","very low","NA")), Fold=if_else(id == 1, Fold, as.numeric(NA))) %>%
+  mutate(Data=if_else(id == 1, Data, "Nanopore"), Coverage=factor(if_else(id == 1, Coverage, "other"), levels=c("very high","high","medium","low","very low","other")), Fold=if_else(id == 1, Fold, as.numeric(NA))) %>%
   select(-id) %>%
   unite(Category, Species, Data, sep = " ", remove = TRUE) %>%
   mutate(Category = factor(Category, levels = unique(Category))) %>%
@@ -49,8 +49,8 @@ tick_text_size <- 16
 #time_labels <- c(str_c(c(seq(2,18,2),seq(30,120,30)),"m"),str_c(seq(1,6,1),"d"),str_c(seq(1,9,2),"w"),if_else((1:16)%%2 == 0,str_c(seq(11,41,2),"w"), ''))
 
 finish_plot <- list(
-  scale_color_manual(values=c("#488BC2","#7FB972","#B5BD4C","#D92120","#E6642C","#781C81","#664CFF","#BBBBBB","#D9AD3C")),
-  scale_shape_manual(values=c(17, 15, 19, 18, 25, 7)),
+  scale_color_manual(values=c("#7FB972","#B5BD4C","#D92120","#E6642C","#488BC2","#664CFF","#D9AD3C","#B15928","#781C81","#BBBBBB","black")),
+  scale_shape_manual(values=c(24, 22, 21, 23, 25, 7)),
   #scale_x_continuous(breaks=time_ticks, labels=time_labels),
   facet_wrap(. ~ Category, scales="free", ncol=2),
   theme_bw(),
@@ -65,13 +65,15 @@ finish_plot <- list(
         legend.position = "top",
         legend.key.size = unit(8, 'mm'),
         legend.box = "vertical",
-        legend.margin=margin(),
-        panel.grid.minor = element_blank())
+        legend.margin=margin(l=-8, t = -1.5, b=-2, unit='mm'),
+        panel.grid.minor = element_blank()),
+  guides(color=guide_legend(nrow=4, order=1))
 )
 
 data %>%
-  ggplot(aes(x=cpu_time, y=memory_gb, color=Assembly, shape=Coverage)) +
-    geom_point(size=6) +
+  ggplot(aes(x=cpu_time, y=memory_gb, color=Assembly)) +
+    geom_point(aes(shape=Coverage), size=4) +
+    geom_path(data=filter(data,Coverage!="other"), size=2, show.legend=FALSE) +
     #scale_x_continuous(limits = c(0, NA), expand=c(0.07,0.05)) +
     xlab("CPU time (min/day)") +
     ylab("Max. memory (Gb)") +
@@ -81,8 +83,9 @@ data %>%
 ggsave(outfile1, width=297, height=210, units="mm")
 
 data %>%
-  ggplot(aes(x=elapsed_time, y=memory_gb, color=Assembly, shape=Coverage)) +
-    geom_point(size=6, na.rm=TRUE) +
+  ggplot(aes(x=elapsed_time, y=memory_gb, color=Assembly)) +
+    geom_point(aes(shape=Coverage), size=6, na.rm=TRUE) +
+    geom_path(data=filter(data,Coverage!="other"), size=2, show.legend=FALSE, na.rm=TRUE) +
     xlab("Elapsed time (min/day)") +
     ylab("Max. memory (Gb)") +
     finish_plot

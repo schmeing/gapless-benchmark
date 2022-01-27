@@ -32,7 +32,7 @@ rule timelog_csv:
         expand("storage/assemblies/human/00-flye-nanopore_{coverage}x/timelog.txt", coverage=[61,30,15,8]),
         expand("storage/assemblies/ecoli/01-gapless-pacbio_clr_{coverage}x-shassembly-SRR3191692/timelog.txt", coverage=[113,57,28,14,7]),
         expand("storage/assemblies/truncatus/01-gapless-pacbio_clr_{coverage}x-supernova-chromium/timelog.txt", coverage=[86,43,21,11,5]),
-        expand("storage/assemblies/human/01-gapless-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[16,8,4]),
+        expand("storage/assemblies/human/01-gapless-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[33,16,8,4]),
         expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-flye-hifi_33x/timelog.txt", coverage=[61,30,15,8]),
         expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[61,30,15,8]),
         expand("storage/assemblies/ecoli/01-lrscaf-pacbio_clr_{coverage}x-shassembly-SRR3191692/timelog{logs}.txt", coverage=[113,57,28,14,7], logs=['_minimap2','_lrscaf']),
@@ -48,7 +48,8 @@ rule timelog_csv:
         expand("storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_{coverage}x-shassembly-SRR3191692/timelog.txt", coverage=[113,57,28,14,7]),
         expand("storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_{coverage}x-supernova-chromium/timelog.txt", coverage=[86,43,21,11,5]),
         expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[33,16,8,4]),
-        expand("storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[15,8]),
+        expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_{coverage}x-flye-hifi_33x/timelog.txt", coverage=[8]),
+        expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/timelog.txt", coverage=[30,15,8]),
         expand("storage/assemblies/ecoli/00-shassembly-SRR3191692/timelog{logs}.txt", logs=['_ntcard','_denoise','_contiger','_minia']),
         expand("storage/assemblies/truncatus/00-supernova-chromium/timelog{logs}.txt", logs=['','_output']),
         expand("storage/assemblies/human/00-supernova-T2T_10X_NovaSeq/timelog{logs}.txt", logs=['','_output'])
@@ -58,10 +59,14 @@ rule timelog_csv:
         """
         echo "folder,cpu_time_s,elapsed_time_s,memory_kb" > {output}
         for f in storage/assemblies/*/*; do
-            printf "$f/," >> {output}
-            grep ' time (seconds)' ${{f}}/timelog*.txt | awk '{{time += $NF}}END{{printf "%.0f,", time}}' >> {output}
-            grep 'Elapsed (wall clock) time (h:mm:ss or m:ss):' ${{f}}/timelog*.txt | awk '{{timestr=$NF;p=index(timestr,":");ctime=0;while(p>0){{ctime=ctime*60+substr(timestr,1,p-1);timestr=substr(timestr,p+1);p=index(timestr,":")}};ctime=ctime*60+timestr;time+=ctime}}END{{printf "%.0f,", time}}' >> {output}
-            grep 'Maximum resident set size (kbytes):' ${{f}}/timelog*.txt | awk 'BEGIN{{mem=0}}{{if($NF > mem){{mem = $NF}}}}END{{printf "%d\\n", mem}}' >> {output}
+            if [ $(ls -1 ${{f}}/timelog*.txt 2>/dev/null | wc -l) != 0 ]; then
+                printf "$f/," >> {output}
+                grep ' time (seconds)' ${{f}}/timelog*.txt | awk '{{time += $NF}}END{{printf "%.0f,", time}}' >> {output}
+                grep 'Elapsed (wall clock) time (h:mm:ss or m:ss):' ${{f}}/timelog*.txt | awk '{{timestr=$NF;p=index(timestr,":");ctime=0;while(p>0){{ctime=ctime*60+substr(timestr,1,p-1);timestr=substr(timestr,p+1);p=index(timestr,":")}};ctime=ctime*60+timestr;time+=ctime}}END{{printf "%.0f,", time}}' >> {output}
+                grep 'Maximum resident set size (kbytes):' ${{f}}/timelog*.txt | awk 'BEGIN{{mem=0}}{{if($NF > mem){{mem = $NF}}}}END{{printf "%d\\n", mem}}' >> {output}
+            else
+                echo "${{f}} does not contain timelog file"
+            fi
         done
         """
 
@@ -73,9 +78,9 @@ rule figure_quast:
         expand("storage/assemblies/human/00-flye-nanopore_{coverage}x/quast_assembly/transposed_report.tsv", coverage=[61,30,15,8]),
         expand("storage/assemblies/ecoli/01-gapless-pacbio_clr_{coverage}x-shassembly-SRR3191692/quast_gapless/transposed_report.tsv", coverage=[113,57,28,14,7]),
         expand("storage/assemblies/truncatus/01-gapless-pacbio_clr_{coverage}x-supernova-chromium/quast_gapless/transposed_report.tsv", coverage=[86,43,21,11,5]),
-        expand("storage/assemblies/human/01-gapless-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapless/transposed_report.tsv", coverage=[16,8,4]),
-        expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-flye-hifi_33x/quast_gapless/transposed_report.tsv", coverage=[61,30,15,8]),
-        expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapless/transposed_report.tsv", coverage=[61,30,15,8]),
+        expand("storage/assemblies/human/01-gapless-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapless/transposed_report.tsv", coverage=[33,16,8,4]),
+        expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-flye-hifi_33x/quast_gapless/transposed_report.tsv", coverage=[121,61,30,15,8]),
+        expand("storage/assemblies/human/01-gapless-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapless/transposed_report.tsv", coverage=[121,61,30,15,8]),
         expand("storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_{coverage}x-shassembly-SRR3191692/quast_gapclosed/transposed_report.tsv", coverage=[113,57,28,14,7]),
         expand("storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_{coverage}x-supernova-chromium/quast_gapclosed/transposed_report.tsv", coverage=[86,43,21,11,5]),
         expand("storage/assemblies/human/02-lr_gapcloser-lrscaf-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapclosed/transposed_report.tsv", coverage=[33,16,8,4]),
@@ -84,7 +89,8 @@ rule figure_quast:
         expand("storage/assemblies/ecoli/02-tgs_gapcloser-lrscaf-pacbio_clr_{coverage}x-shassembly-SRR3191692/quast_gapclosed/transposed_report.tsv", coverage=[113,57,28,14,7]),
         expand("storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_{coverage}x-supernova-chromium/quast_gapclosed/transposed_report.tsv", coverage=[86,43,21,11,5]),
         expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-hifi_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapclosed/transposed_report.tsv", coverage=[33,16,8,4]),
-        expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapclosed/transposed_report.tsv", coverage=[15,8]),
+        expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_{coverage}x-supernova-T2T_10X_NovaSeq/quast_gapclosed/transposed_report.tsv", coverage=[30,15,8]),
+        expand("storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_{coverage}x-flye-hifi_33x/quast_gapclosed/transposed_report.tsv", coverage=[8]),
         "storage/assemblies/ecoli/00-shassembly-SRR3191692/quast_minia.contigs/transposed_report.tsv",
         "storage/assemblies/truncatus/00-supernova-chromium/quast_pseudohap.1/transposed_report.tsv",
         "storage/assemblies/human/00-supernova-T2T_10X_NovaSeq/quast_pseudohap.1/transposed_report.tsv",
@@ -106,7 +112,7 @@ rule figure_coverage_cdf:
 rule figure_comp_res_gapless:
     input:
         "storage/assemblies/truncatus/01-gapless-pacbio_clr_86x-supernova-chromium/timelog.pdf",
-        "storage/assemblies/human/01-gapless-hifi_16x-supernova-T2T_10X_NovaSeq/timelog.pdf",
+        "storage/assemblies/human/01-gapless-hifi_33x-supernova-T2T_10X_NovaSeq/timelog.pdf",
         "storage/assemblies/human/01-gapless-nanopore_61x-flye-hifi_33x/timelog.pdf",
         "storage/assemblies/human/01-gapless-nanopore_61x-supernova-T2T_10X_NovaSeq/timelog.pdf"
     output:
@@ -194,6 +200,44 @@ rule quast:
     shell:
         "quast-lg.py -t {threads} -o {params.outdir} -r {input.ref} {params.fragmented} -s -l {wildcards.asmmeth} --no-icarus {input.asm} >{log} 2>&1"
 
+rule samba_finish:
+    input:
+        "work/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}/input_asm.fa.scaffolds.fa"
+    output:
+        "storage/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}/scaffolds.fasta.gz"
+    shell:
+        "cat {input} | gzip > {output}"
+
+assembler_output_dict = {}
+assembler_output_dict['supernova'] = "pseudohap.1.fasta.gz"
+assembler_output_dict['shassembly'] = "minia.contigs.fasta.gz"
+assembler_output_dict['flye'] = "assembly.fasta.gz"
+rule samba:
+    input:
+        asm=lambda wildcards: "storage/assemblies/{}/00-{}-{}/{}".format(wildcards.species, wildcards.assembler, wildcards.data2, assembler_output_dict[wildcards.assembler]),
+        reads="work/data/{species}/{data}_{cov}x.fastq.gz"
+    output:
+        "work/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}/input_asm.fa.scaffolds.fa",
+        timelog="storage/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}/timelog_scaf.txt"
+    params:
+        datadir="work/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}_data/",
+        outdir="work/assemblies/{species}/01-samba-{data}_{cov}x-{assembler}-{data2}/",
+        minlen=lambda wildcards: "-m 2500" if wildcards.species == "ecoli" else ""
+    log:
+        "logs/assemblies/{species}/samba/01-samba-{data}_{cov}x-{assembler}-{data2}_scaf.log"
+    threads: max_threads
+    shell:
+        """
+        export org_path=$(pwd)
+        mkdir -p {params.datadir}
+        zcat {input.reads} > {params.datadir}/reads.fq
+        zcat {input.asm} > {params.datadir}/input_asm.fa
+        cd {params.outdir}
+        env time -v -o ${{org_path}}/{output.timelog} bash ${{org_path}}/bin/masurca/bin/samba.sh -t {threads} {params.minlen} -r ${{org_path}}/{params.datadir}/input_asm.fa -q ${{org_path}}/{params.datadir}/reads.fq >${{org_path}}/{log} 2>&1
+        cd -
+        rm -f {params.datadir}/{{reads.fa,input_asm.fa}}
+        """
+
 rule TGS_GapCloser_finish:
     input:
         "work/assemblies/{species}/02-tgs_gapcloser-lrscaf-{data}_{cov}x-{assembler}-{data2}/gapclosed.scaff_seqs"
@@ -271,10 +315,6 @@ rule LR_Gapcloser:
         rm -f {params.datadir}/{{reads.fa,input_asm.fa}}
         """
 
-assembler_output_dict = {}
-assembler_output_dict['supernova'] = "pseudohap.1.fasta.gz"
-assembler_output_dict['shassembly'] = "minia.contigs.fasta.gz"
-assembler_output_dict['flye'] = "assembly.fasta.gz"
 minimap_data = {}
 minimap_data['pacbio_clr'] = 'map-pb'
 minimap_data['hifi'] = 'asm20'

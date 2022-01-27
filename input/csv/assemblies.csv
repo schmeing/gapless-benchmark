@@ -1,22 +1,4 @@
 Assembly,Species,Data,Coverage,Fold,Cluster,Cores,Folder,Quast
-Flye,E. Coli,PacBio CLR,very high,113,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_113x/,quast_assembly
-Flye,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_57x/,quast_assembly
-Flye,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_28x/,quast_assembly
-Flye,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_14x/,quast_assembly
-Flye,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_7x/,quast_assembly
-Flye,Dolphin,PacBio CLR,very high,86,High Memory,128,storage/assemblies/truncatus/00-flye-pacbio_clr_86x/,quast_assembly
-Flye,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_43x/,quast_assembly
-Flye,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_21x/,quast_assembly
-Flye,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_11x/,quast_assembly
-Flye,Dolphin,PacBio CLR,very low,5,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_5x/,quast_assembly
-Flye,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/human/00-flye-hifi_33x/,quast_assembly
-Flye,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/00-flye-hifi_16x/,quast_assembly
-Flye,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/00-flye-hifi_8x/,quast_assembly
-Flye,Human,PacBio HiFi,very low,4,High Performance,48,storage/assemblies/human/00-flye-hifi_4x/,quast_assembly
-Flye,Human,Nanopore,high,61,High Memory,48,storage/assemblies/human/00-flye-nanopore_61x/,quast_assembly
-Flye,Human,Nanopore,medium,30,High Memory,48,storage/assemblies/human/00-flye-nanopore_30x/,quast_assembly
-Flye,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/00-flye-nanopore_15x/,quast_assembly
-Flye,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/00-flye-nanopore_8x/,quast_assembly
 gapless,E. Coli,PacBio CLR,very high,113,High Performance,48,storage/assemblies/ecoli/01-gapless-pacbio_clr_113x-shassembly-SRR3191692/,quast_gapless
 gapless,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/ecoli/01-gapless-pacbio_clr_57x-shassembly-SRR3191692/,quast_gapless
 gapless,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/01-gapless-pacbio_clr_28x-shassembly-SRR3191692/,quast_gapless
@@ -27,6 +9,7 @@ gapless,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/trunca
 gapless,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/01-gapless-pacbio_clr_21x-supernova-chromium/,quast_gapless
 gapless,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/01-gapless-pacbio_clr_11x-supernova-chromium/,quast_gapless
 gapless,Dolphin,PacBio CLR,very low,5,High Performance,48,storage/assemblies/truncatus/01-gapless-pacbio_clr_5x-supernova-chromium/,quast_gapless
+gapless,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/human/01-gapless-hifi_33x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/01-gapless-hifi_16x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/01-gapless-hifi_8x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,PacBio HiFi,very low,4,High Performance,48,storage/assemblies/human/01-gapless-hifi_4x-supernova-T2T_10X_NovaSeq/,quast_gapless
@@ -38,13 +21,32 @@ gapless,Human,Nanopore,high,61,High Memory,48,storage/assemblies/human/01-gaples
 gapless,Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/01-gapless-nanopore_30x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/01-gapless-nanopore_15x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/01-gapless-nanopore_8x-supernova-T2T_10X_NovaSeq/,quast_gapless
+SAMBA,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_28x-shassembly-SRR3191692/,quast_scaffolds
+SAMBA,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_14x-shassembly-SRR3191692/,quast_scaffolds
+SAMBA,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_7x-shassembly-SRR3191692/,quast_scaffolds
+SAMBA,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/01-samba-pacbio_clr_43x-supernova-chromium/,quast_scaffolds
+SAMBA,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/01-samba-pacbio_clr_21x-supernova-chromium/,quast_scaffolds
+SAMBA,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/01-samba-pacbio_clr_11x-supernova-chromium/,quast_scaffolds
+SAMBA,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/human/01-samba-hifi_33x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/01-samba-hifi_16x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/01-samba-hifi_8x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA (Flye),Human,Nanopore,very high,121,High Memory,48,storage/assemblies/human/01-samba-nanopore_121x-flye-hifi_33x/,quast_scaffolds
+SAMBA (Flye),Human,Nanopore,high,61,High Performance,48,storage/assemblies/human/01-samba-nanopore_61x-flye-hifi_33x/,quast_scaffolds
+SAMBA (Flye),Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/01-samba-nanopore_30x-flye-hifi_33x/,quast_scaffolds
+SAMBA (Flye),Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/01-samba-nanopore_15x-flye-hifi_33x/,quast_scaffolds
+SAMBA (Flye),Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/01-samba-nanopore_8x-flye-hifi_33x/,quast_scaffolds
+SAMBA,Human,Nanopore,very high,121,High Memory,48,storage/assemblies/human/01-samba-nanopore_121x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,Nanopore,high,61,High Performance,48,storage/assemblies/human/01-samba-nanopore_61x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/01-samba-nanopore_30x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/01-samba-nanopore_15x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
+SAMBA,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/01-samba-nanopore_8x-supernova-T2T_10X_NovaSeq/,quast_scaffolds
 LR_Gapcloser,E. Coli,PacBio CLR,very high,113,High Performance,48,storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_113x-shassembly-SRR3191692/,quast_gapclosed
 LR_Gapcloser,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_57x-shassembly-SRR3191692/,quast_gapclosed
 LR_Gapcloser,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_28x-shassembly-SRR3191692/,quast_gapclosed
 LR_Gapcloser,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_14x-shassembly-SRR3191692/,quast_gapclosed
 LR_Gapcloser,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/02-lr_gapcloser-lrscaf-pacbio_clr_7x-shassembly-SRR3191692/,quast_gapclosed
-LR_Gapcloser,Dolphin,PacBio CLR,very high,86,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_43x-supernova-chromium/,quast_gapclosed
-LR_Gapcloser,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_86x-supernova-chromium/,quast_gapclosed
+LR_Gapcloser,Dolphin,PacBio CLR,very high,86,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_86x-supernova-chromium/,quast_gapclosed
+LR_Gapcloser,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_43x-supernova-chromium/,quast_gapclosed
 LR_Gapcloser,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_21x-supernova-chromium/,quast_gapclosed
 LR_Gapcloser,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_11x-supernova-chromium/,quast_gapclosed
 LR_Gapcloser,Dolphin,PacBio CLR,very low,5,High Performance,48,storage/assemblies/truncatus/02-lr_gapcloser-lrscaf-pacbio_clr_5x-supernova-chromium/,quast_gapclosed
@@ -52,12 +54,12 @@ LR_Gapcloser,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/hu
 LR_Gapcloser,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-hifi_16x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-hifi_8x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser,Human,PacBio HiFi,very low,4,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-hifi_4x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
-LR_Gapcloser,Human,Nanopore,very high,121,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_121x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser (Flye),Human,Nanopore,very high,121,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_121x-flye-hifi_33x/,quast_gapclosed
 LR_Gapcloser (Flye),Human,Nanopore,high,61,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_61x-flye-hifi_33x/,quast_gapclosed
 LR_Gapcloser (Flye),Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_30x-flye-hifi_33x/,quast_gapclosed
 LR_Gapcloser (Flye),Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_15x-flye-hifi_33x/,quast_gapclosed
 LR_Gapcloser (Flye),Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_8x-flye-hifi_33x/,quast_gapclosed
+LR_Gapcloser,Human,Nanopore,very high,121,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_121x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser,Human,Nanopore,high,61,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_61x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser,Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_30x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 LR_Gapcloser,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/02-lr_gapcloser-lrscaf-nanopore_15x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
@@ -76,8 +78,28 @@ TGS-GapCloser,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/h
 TGS-GapCloser,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-hifi_16x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 TGS-GapCloser,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-hifi_8x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 TGS-GapCloser,Human,PacBio HiFi,very low,4,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-hifi_4x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
+TGS-GapCloser (Flye),Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_8x-flye-hifi_33x/,quast_gapclosed
+TGS-GapCloser,Human,Nanopore,medium,30,High Memory,128,storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_30x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 TGS-GapCloser,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_15x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
 TGS-GapCloser,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/02-tgs_gapcloser-lrscaf-nanopore_8x-supernova-T2T_10X_NovaSeq/,quast_gapclosed
+Flye,E. Coli,PacBio CLR,very high,113,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_113x/,quast_assembly
+Flye,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_57x/,quast_assembly
+Flye,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_28x/,quast_assembly
+Flye,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_14x/,quast_assembly
+Flye,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/00-flye-pacbio_clr_7x/,quast_assembly
+Flye,Dolphin,PacBio CLR,very high,86,High Memory,128,storage/assemblies/truncatus/00-flye-pacbio_clr_86x/,quast_assembly
+Flye,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_43x/,quast_assembly
+Flye,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_21x/,quast_assembly
+Flye,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_11x/,quast_assembly
+Flye,Dolphin,PacBio CLR,very low,5,High Performance,48,storage/assemblies/truncatus/00-flye-pacbio_clr_5x/,quast_assembly
+Flye,Human,PacBio HiFi,high,33,High Performance,48,storage/assemblies/human/00-flye-hifi_33x/,quast_assembly
+Flye,Human,PacBio HiFi,medium,16,High Performance,48,storage/assemblies/human/00-flye-hifi_16x/,quast_assembly
+Flye,Human,PacBio HiFi,low,8,High Performance,48,storage/assemblies/human/00-flye-hifi_8x/,quast_assembly
+Flye,Human,PacBio HiFi,very low,4,High Performance,48,storage/assemblies/human/00-flye-hifi_4x/,quast_assembly
+Flye,Human,Nanopore,high,61,High Memory,48,storage/assemblies/human/00-flye-nanopore_61x/,quast_assembly
+Flye,Human,Nanopore,medium,30,High Memory,48,storage/assemblies/human/00-flye-nanopore_30x/,quast_assembly
+Flye,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/00-flye-nanopore_15x/,quast_assembly
+Flye,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/00-flye-nanopore_8x/,quast_assembly
 SH-assembly,E. Coli,Illumina,,,High Performance,48,storage/assemblies/ecoli/00-shassembly-SRR3191692/,quast_minia.contigs
 supernova,Dolphin,10X Chromium,,,High Performance,48,storage/assemblies/truncatus/00-supernova-chromium/,quast_pseudohap.1
 supernova,Human,10X Chromium,,,High Performance,48,storage/assemblies/human/00-supernova-T2T_10X_NovaSeq/,quast_pseudohap.1
