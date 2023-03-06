@@ -10,9 +10,75 @@ rule all:
         "results/figures/figure_quast_NG50_vs_misassemblies.pdf",
         "results/figures/figure_quast_completeness_vs_duplication.pdf",
         "results/figures/figure_cpu_time_vs_memory.pdf",
+        "results/figures/supplementary/figure_cpu_time_vs_memory_individually.pdf",
         "results/figures/supplementary/figure_comp_res_gapless.pdf",
         "results/figures/supplementary/figure_coverage_cdf1.pdf",
-        "results/figures/supplementary/figure_coverage_cdf2.pdf"
+        "results/figures/supplementary/figure_coverage_cdf2.pdf",
+        "results/figures/supplementary/figure_filter_performance.pdf"
+
+rule figure_filter_performance:
+    input:
+        per1="input/csv/filter_performance/filter_test-pacbio_clr_21x-supernova-chromium.csv",
+        per2="input/csv/filter_performance/filter_test-hifi_33x-supernova-T2T_10X_NovaSeq.csv",
+        per3="input/csv/filter_performance/filter_test-nanopore_30x-supernova-T2T_10X_NovaSeq.csv",
+        per4="input/csv/filter_performance/filter_test-nanopore_30x-flye-hifi_33x.csv"
+    output:
+        "results/figures/supplementary/figure_filter_performance.pdf"
+    params:
+        title1="Dolphin PacBio CLR 21x",
+        title2="Human PacBio HiFi 33x",
+        title3="Human Nanopore sn 30x",
+        title4="Human Nanopore Flye 30x"
+    shell:
+        """
+        Rscript bin/figure_filter_summary.R {input.per1} "{params.title1}" {input.per2} "{params.title2}" {input.per3} "{params.title3}" {input.per4} "{params.title4}" {output}
+        """
+        
+rule figure_filter_performance_low:
+    input:
+        per1="input/csv/filter_performance/filter_test-pacbio_clr_5x-supernova-chromium.csv",
+        per2="input/csv/filter_performance/filter_test-hifi_4x-supernova-T2T_10X_NovaSeq.csv",
+        per3="input/csv/filter_performance/filter_test-nanopore_8x-supernova-T2T_10X_NovaSeq.csv",
+        per4="input/csv/filter_performance/filter_test-nanopore_8x-flye-hifi_33x.csv"
+    output:
+        "results/figures/supplementary/figure_filter_performance_low.pdf"
+    params:
+        title1="Dolphin PacBio CLR 5x",
+        title2="Human PacBio HiFi 4x",
+        title3="Human Nanopore sn 8x",
+        title4="Human Nanopore Flye 8x"
+    shell:
+        """
+        Rscript bin/figure_filter_summary.R {input.per1} "{params.title1}" {input.per2} "{params.title2}" {input.per3} "{params.title3}" {input.per4} "{params.title4}" {output}
+        """
+
+rule figure_filter_performance_high:
+    input:
+        per1="input/csv/filter_performance/filter_test-pacbio_clr_86x-supernova-chromium.csv",
+        per2="input/csv/filter_performance/filter_test-hifi_33x-supernova-T2T_10X_NovaSeq.csv",
+        per3="input/csv/filter_performance/filter_test-nanopore_121x-supernova-T2T_10X_NovaSeq.csv",
+        per4="input/csv/filter_performance/filter_test-nanopore_121x-flye-hifi_33x.csv"
+    output:
+        "results/figures/supplementary/figure_filter_performance_high.pdf"
+    params:
+        title1="Dolphin PacBio CLR 86x",
+        title2="Human PacBio HiFi 33x",
+        title3="Human Nanopore sn 121x",
+        title4="Human Nanopore Flye 121x"
+    shell:
+        """
+        Rscript bin/figure_filter_summary.R {input.per1} "{params.title1}" {input.per2} "{params.title2}" {input.per3} "{params.title3}" {input.per4} "{params.title4}" {output}
+        """
+
+rule figure_comp_res_individually:
+    input:
+        "results/csv/timelog.csv",
+        "input/csv/assemblies.csv"
+    output:
+        "results/figures/supplementary/figure_cpu_time_vs_memory_individually.pdf",
+        "results/figures/supplementary/figure_elapsed_time_vs_memory_individually.pdf"
+    shell:
+        "Rscript bin/figure_comp_res_individually.R {input} {output}"
 
 rule figure_comp_res:
     input:
@@ -107,7 +173,7 @@ rule figure_coverage_cdf:
     output:
         "results/figures/supplementary/figure_coverage_cdf{i}.pdf"
     shell:
-        "pdftk {input} cat 5 output {output}"
+        "pdftk {input} cat 10 output {output}"
 
 rule figure_comp_res_gapless:
     input:
@@ -178,6 +244,53 @@ rule gapless_timelog_csv:
                 grep 'Maximum resident set size (kbytes):' ${{f}} | awk 'BEGIN{{mem=0}}{{if($NF > mem){{mem = $NF}}}}END{{printf "%d\\n", mem}}' >> {output}
             done
         done
+        """
+
+rule quast_samba_check:
+    input:
+        asm="storage/assemblies/human/00-samba-nanopore_30x-chm13_WashU/scaffolds.fasta.gz",
+        ref="input/human/reference/chm13.draft_v1.1.fasta.gz"
+    output:
+        "storage/assemblies/human/00-samba-nanopore_30x-chm13_WashU/quast_scaffolds/report.pdf",
+        "storage/assemblies/human/00-samba-nanopore_30x-chm13_WashU/quast_scaffolds/transposed_report.tsv"
+    params:
+        outdir="storage/assemblies/human/00-samba-nanopore_30x-chm13_WashU/quast_scaffolds",
+    threads: 2
+    log:
+        "logs/assemblies/human/quast/00-samba-nanopore_30x-chm13_WashU-scaffolds.txt"
+    shell:
+        "quast-lg.py -t {threads} -o {params.outdir} -r {input.ref} -s -l 00-samba-nanopore_30x-chm13_WashU --no-icarus {input.asm} >{log} 2>&1"
+
+rule samba_check_finish:
+    input:
+        "work/assemblies/human/00-samba-nanopore_30x-chm13_WashU/input_asm.fa.scaffolds.fa"
+    output:
+        "storage/assemblies/human/00-samba-nanopore_30x-chm13_WashU/scaffolds.fasta.gz"
+    shell:
+        "cat {input} | gzip > {output}"
+
+rule samba_check:
+    input:
+        asm="input/human/reference/GCA_000983455.2_CHM13_Draft_Assembly_genomic.fna.gz",
+        reads="work/data/human/nanopore_30x.fastq.gz"
+    output:
+        "work/assemblies/human/00-samba-nanopore_30x-chm13_WashU/input_asm.fa.scaffolds.fa"
+    params:
+        datadir="work/assemblies/human/00-samba-nanopore_30x-chm13_WashU_data/",
+        outdir="work/assemblies/human/00-samba-nanopore_30x-chm13_WashU/"
+    log:
+        "logs/assemblies/human/samba/00-samba-nanopore_30x-chm13_WashU_scaf.log"
+    threads: max_threads
+    shell:
+        """
+        export org_path=$(pwd)
+        mkdir -p {params.datadir}
+        zcat {input.reads} > {params.datadir}/reads.fq
+        zcat {input.asm} > {params.datadir}/input_asm.fa
+        cd {params.outdir}
+        bash ${{org_path}}/bin/masurca/bin/samba.sh -t {threads} -m 5000 -r ${{org_path}}/{params.datadir}/input_asm.fa -q ${{org_path}}/{params.datadir}/reads.fq >${{org_path}}/{log} 2>&1
+        cd -
+        rm -f {params.datadir}/{{reads.fa,input_asm.fa}}
         """
 
 ref_dict = {}

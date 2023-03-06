@@ -71,18 +71,19 @@ finish_plot <- list(
 )
 
 data %>%
-  #filter(Category == "E. Coli PacBio CLR") %>%
-  #filter(Category == "Dolphin PacBio CLR") %>%
+  #filter(Category == "E. Coli PacBio CLR" | Category == "Dolphin PacBio CLR") %>%
+  #filter(Category == "Human PacBio HiFi" | Category == "Human Nanopore") %>%
   ggplot(aes(x=`misassemblies`, y=NGA50, color=Assembly)) +
     geom_point(aes(shape=Coverage), size=4) +
     geom_path(data=filter(data,Coverage!="other"), size=2, show.legend=FALSE) +
-    #geom_path(data=filter(data,Coverage!="other", Category == "E. Coli PacBio CLR"), size=2, show.legend=FALSE) +
-    #geom_path(data=filter(data,Coverage!="other", Category == "Dolphin PacBio CLR"), size=2, show.legend=FALSE) +
+    #geom_path(data=filter(data,Coverage!="other", Category == "E. Coli PacBio CLR" | Category == "Dolphin PacBio CLR"), size=2, show.legend=FALSE) +
+    #geom_path(data=filter(data,Coverage!="other", Category == "Human PacBio HiFi" | Category == "Human Nanopore"), size=2, show.legend=FALSE) +
     facet_wrap(Category2 ~ ., scales="free", ncol=2) +
     scale_x_continuous(limits = c(0, NA), expand=c(0.07,0.05)) +
     xlab("misassemblies (1/Mbp)") +
     ylab("NGA50 (Mbp)") +
     finish_plot +
+    #scale_color_manual(values=c("#7FB972","#D92120","#488BC2","#D9AD3C","#781C81","#BBBBBB","black")) +
     guides(color=guide_legend(nrow=4, order=1))
 
 ggsave(outfile1, width=210, height=240, units="mm")

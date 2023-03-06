@@ -20,6 +20,7 @@ def main(argv):
     folder = argv[0]
     
     conparts = pd.read_csv(os.path.join(folder, "contig_parts.csv"))
+    # minimap2 -t 10 -x asm5 --secondary=no chm13.draft_v1.1.fasta.gz gapless_split.fa | cut -f 1-12 > ground_truth.paf
     ground_truth = pd.read_csv(os.path.join(folder, "ground_truth.paf"), sep='\t', names=["qname","qlen","qstart","qend","strand","tname","tlen","tstart","tend","matches","aln_len","mapq"])
     filters_csv = pd.read_csv(os.path.join(folder, "filtered_bridges.csv"))
     alt_filters_csv = pd.read_csv(os.path.join(folder, "alt_filter_bridges.csv"))

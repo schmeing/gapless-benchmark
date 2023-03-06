@@ -21,6 +21,8 @@ gapless,Human,Nanopore,high,61,High Memory,48,storage/assemblies/human/01-gaples
 gapless,Human,Nanopore,medium,30,High Performance,48,storage/assemblies/human/01-gapless-nanopore_30x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,Nanopore,low,15,High Performance,48,storage/assemblies/human/01-gapless-nanopore_15x-supernova-T2T_10X_NovaSeq/,quast_gapless
 gapless,Human,Nanopore,very low,8,High Performance,48,storage/assemblies/human/01-gapless-nanopore_8x-supernova-T2T_10X_NovaSeq/,quast_gapless
+SAMBA,E. Coli,PacBio CLR,very high,113,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_113x-shassembly-SRR3191692/,quast_scaffolds
+SAMBA,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_57x-shassembly-SRR3191692/,quast_scaffolds
 SAMBA,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_28x-shassembly-SRR3191692/,quast_scaffolds
 SAMBA,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_14x-shassembly-SRR3191692/,quast_scaffolds
 SAMBA,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/01-samba-pacbio_clr_7x-shassembly-SRR3191692/,quast_scaffolds
@@ -69,7 +71,7 @@ TGS-GapCloser,E. Coli,PacBio CLR,high,57,High Performance,48,storage/assemblies/
 TGS-GapCloser,E. Coli,PacBio CLR,medium,28,High Performance,48,storage/assemblies/ecoli/02-tgs_gapcloser-lrscaf-pacbio_clr_28x-shassembly-SRR3191692/,quast_gapclosed
 TGS-GapCloser,E. Coli,PacBio CLR,low,14,High Performance,48,storage/assemblies/ecoli/02-tgs_gapcloser-lrscaf-pacbio_clr_14x-shassembly-SRR3191692/,quast_gapclosed
 TGS-GapCloser,E. Coli,PacBio CLR,very low,7,High Performance,48,storage/assemblies/ecoli/02-tgs_gapcloser-lrscaf-pacbio_clr_7x-shassembly-SRR3191692/,quast_gapclosed
-TGS-GapCloser,Dolphin,PacBio CLR,very high,86,High Performance,48,storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_86x-supernova-chromium/,quast_gapclosed
+TGS-GapCloser,Dolphin,PacBio CLR,very high,86,High Memory,48,storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_86x-supernova-chromium/,quast_gapclosed
 TGS-GapCloser,Dolphin,PacBio CLR,high,43,High Performance,48,storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_43x-supernova-chromium/,quast_gapclosed
 TGS-GapCloser,Dolphin,PacBio CLR,medium,21,High Performance,48,storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_21x-supernova-chromium/,quast_gapclosed
 TGS-GapCloser,Dolphin,PacBio CLR,low,11,High Performance,48,storage/assemblies/truncatus/02-tgs_gapcloser-lrscaf-pacbio_clr_11x-supernova-chromium/,quast_gapclosed
